@@ -4,12 +4,14 @@
   "description": "Use this application to write, save, and delete notes. Featuring an express backend and save and retrieve note data from a JSON file.",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "uuid": "^8.3.2"
   },
   "repository": {
     "type": "git",
