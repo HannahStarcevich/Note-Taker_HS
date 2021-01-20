@@ -6,7 +6,6 @@ const express = require("express");
 
 const fs = require("fs")
 
-// set up for connecting through file paths
 const path = require("path");
 
 //call the express function
@@ -31,30 +30,21 @@ app.get("/", (req, res) => {
 })
 
 // set up URL for notes page
-
 app.get("/notes", (req, res) => {
     res.sendFile(path.join(__dirname, "public/notes.html"))
 })
 
-// let notes = []
-
 // Grab the full note database from db.json
 app.get("/api/notes", (req, res) => {
 
-    // res.sendFile(path.join(__dirname, "db/db.json"))
-    // console.log(notes)
-    // console.log(response)
-
     fs.readFile("db/db.json", "utf-8", (err, data) => {
         if (err) throw error
-        console.log("this is data", data)
-        // notes = JSON.parse(data)
         res.json(JSON.parse(data))
     })
 
 })
 
-// Create New Note - takes in JSON input
+// Create New Note 
 app.post("/api/notes", function (req, res) {
 
     fs.readFile("db/db.json", "utf-8", (err, data) => {
@@ -77,7 +67,7 @@ app.post("/api/notes", function (req, res) {
     })
 });
 
-// Delete
+// Delete Specific Note 
 app.delete("/api/notes/:id", (req, res) => {
     fs.readFile("db/db.json", "utf-8", (err, data) => {
         if (err) throw error
