@@ -77,25 +77,24 @@ app.post("/api/notes", function (req, res) {
     })
 });
 
-// // Displays a single note, or shows "No note found"
-// app.get("/api/notes/:id", function (req, res) {
-//     var noteSelected = req.params.notes;
+// Delete
+app.delete("/api/notes/:id", (req, res) => {
+    fs.readFile("db/db.json", "utf-8", (err, data) => {
+        if (err) throw error
+        let notes = JSON.parse(data)
+        var getId = req.params.id
+        notes.forEach((note, i) => {
+            if (note.id === parseInt(getId)) {
+                notes.splice(i, 1);
+            }
+        });
 
-//     console.log(chosen);
-
-//     for (var i = 0; i < notes.length; i++) {
-//         if (chosen === notes[i].routeName) {
-//             return res.json(notes[i]);
-//         }
-//     }
-
-//     return res.send("No note found");
-
-// });
-
-
-
-
+        fs.writeFile("db/db.json", JSON.stringify(notes), function (err) {
+            if (err) return console.log(err);
+            res.json(true)
+        })
+    })
+});
 
 
 // launch the listener to listen for requests from the client
